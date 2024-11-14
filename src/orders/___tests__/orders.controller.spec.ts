@@ -4,10 +4,7 @@ import { OrdersService } from '../orders.service';
 import { OrderResponseDto } from '../dto/order-response.dto';
 import { CreateOrderDto } from '../dto/createOrder.dto';
 import { AuthGuard } from '../../auth/guard/auth.guard';
-import {
-  InternalServerErrorException,
-  NotFoundException
-} from '@nestjs/common';
+import { NotFoundException } from '@nestjs/common';
 import { ValidateIdDto } from '../dto/validateId.dto';
 
 describe('OrdersController', () => {
@@ -113,7 +110,7 @@ describe('OrdersController', () => {
       );
 
       await expect(controller.createOrder(createOrderDto)).rejects.toThrow(
-        InternalServerErrorException
+        NotFoundException
       );
     });
   });

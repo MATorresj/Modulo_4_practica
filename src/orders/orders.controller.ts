@@ -5,7 +5,6 @@ import {
   Param,
   Get,
   NotFoundException,
-  InternalServerErrorException,
   UseGuards
 } from '@nestjs/common';
 import { OrdersService } from './orders.service';
@@ -30,9 +29,7 @@ export class OrdersController {
       const productIds = products.map((product) => product.id);
       return await this.ordersService.createOrder(userId, productIds);
     } catch (error) {
-      throw new InternalServerErrorException(
-        `Error al crear la orden: ${error.message}`
-      );
+      throw new NotFoundException(`Error al crear la orden: ${error.message}`);
     }
   }
 

@@ -164,11 +164,11 @@ describe('UsersController', () => {
       const result = await usersController.deleteUser({ id: '1' });
 
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { isAdmin, ...userWithoutAdmin } = mockUser;
+      const { password, isAdmin, ...userWithoutAdminAndPassword } = mockUser;
       expect(usersService.deleteUser).toHaveBeenCalledWith('1');
       expect(result).toEqual({
         message: 'Usuario eliminado con éxito',
-        user: userWithoutAdmin
+        user: userWithoutAdminAndPassword
       });
     });
 

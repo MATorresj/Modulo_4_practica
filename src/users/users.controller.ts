@@ -11,6 +11,7 @@ import {
   UseInterceptors,
   NotFoundException,
   InternalServerErrorException
+  // BadRequestException
   // ConflictException
 } from '@nestjs/common';
 import { UsersService } from './users.service';
@@ -88,7 +89,6 @@ export class UsersController {
         params.id,
         updateUserDto
       );
-      //pendiente validar si se puede eliminar el password desde aqui o desde el interceptor
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { password, isAdmin, ...userWithoutAdminAndPassword } =
         updatedUser.user;
@@ -110,12 +110,30 @@ export class UsersController {
     try {
       const deletedUser = await this.usersService.deleteUser(params.id);
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { isAdmin, ...userWithoutAdmin } = deletedUser.user;
-      return { message: 'Usuario eliminado con éxito', user: userWithoutAdmin };
+      const { password, isAdmin, ...userWithoutAdminAndPassword } =
+        deletedUser.user;
+      return {
+        message: 'Usuario eliminado con éxito',
+        user: userWithoutAdminAndPassword
+      };
     } catch (error) {
       throw new NotFoundException(
         `No se encontró el usuario para eliminar: ${error}`
       );
     }
   }
+
+  // @Put(':id/makeAdmin')
+  // @UseGuards(AuthGuard, RolesGuard)
+  // @Roles('admin') // Aseguramos que solo el admin pueda hacer este cambio
+  // async promoteToAdmin(@Param('id') userId: string) {
+  //   try {
+  //     const user = await this.usersService.makeAdmin(userId);
+  //     return { message: 'Usuario promovido a admin', user };
+  //   } catch (error) {
+  //     throw new BadRequestException(
+  //       'No se pudo promover al usuario a admin: ' + error
+  //     );
+  //   }
+  // }
 }
