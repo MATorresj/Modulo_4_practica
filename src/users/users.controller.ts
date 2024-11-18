@@ -124,9 +124,9 @@ export class UsersController {
     }
   }
 
-  @Put(':id/makeAdmin')
-  @UseGuards(AuthGuard, RolesGuard)
-  @Roles(UserRole.Admin) // Aseguramos que solo el admin pueda hacer este cambio
+  @ApiBearerAuth()
+  @Put('makeAdmin/:id')
+  @UseGuards(AuthGuard)
   async promoteToAdmin(@Param('id') userId: string) {
     try {
       const user = await this.usersService.makeAdmin(userId);
