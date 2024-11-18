@@ -7,7 +7,6 @@ import { UpdateProductDto } from '../dtos/updateProduct.dto';
 import { CategoriesService } from '../../categories/categories.service';
 import { FilesService } from '../../files/files.service';
 
-// Mock para el repositorio de productos
 export const mockProductsRepository = {
   getProducts: jest.fn(),
   getById: jest.fn(),
@@ -26,16 +25,16 @@ describe('ProductsService', () => {
       providers: [
         ProductsService,
         {
-          provide: ProductsRepository, // Proporciona el mock del repositorio
+          provide: ProductsRepository,
           useValue: mockProductsRepository
         },
         {
           provide: CategoriesService,
-          useValue: {} // Mock para CategoriesService
+          useValue: {}
         },
         {
           provide: FilesService,
-          useValue: {} // Mock para FilesService
+          useValue: {}
         }
       ]
     }).compile();

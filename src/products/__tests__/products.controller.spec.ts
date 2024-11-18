@@ -28,16 +28,16 @@ describe('ProductsController', () => {
         },
         {
           provide: UsersRepository,
-          useValue: {} // Simulación de UsersRepository para evitar dependencias
+          useValue: {}
         },
         {
           provide: FilesService,
-          useValue: {} // Mock para evitar dependencias si es necesario
+          useValue: {}
         }
       ]
     })
       .overrideGuard(AuthGuard)
-      .useValue({ canActivate: jest.fn(() => true) }) // Mock del guard para evitar errores de dependencia
+      .useValue({ canActivate: jest.fn(() => true) })
       .compile();
 
     controller = module.get<ProductsController>(ProductsController);
@@ -110,7 +110,7 @@ describe('ProductsController', () => {
       const createdProduct = {
         id: '1',
         ...createProductDto,
-        category: { id: '1', name: 'Category 1', products: [] }, // Asegúrate de que este campo esté presente
+        category: { id: '1', name: 'Category 1', products: [] },
         orderDetails: []
       };
 

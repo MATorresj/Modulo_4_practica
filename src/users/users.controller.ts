@@ -123,19 +123,4 @@ export class UsersController {
       );
     }
   }
-
-  // @ApiBearerAuth()
-  // @Put('makeAdmin/:id')
-  // @UseGuards(AuthGuard, RolesGuard)
-  // @Roles(UserRole.User)
-  // async promoteToAdmin(@Param('id') userId: string) {
-  //   try {
-  //     const user = await this.usersService.makeAdmin(userId);
-  //     return { message: 'Usuario promovido a admin', user };
-  //   } catch (error) {
-  //     throw new BadRequestException(
-  //       'No se pudo promover al usuario a admin: ' + error
-  //     );
-  //   }
-  // }
 }

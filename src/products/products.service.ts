@@ -1,7 +1,8 @@
 import {
   BadRequestException,
   Injectable,
-  NotFoundException
+  NotFoundException,
+  OnModuleInit
 } from '@nestjs/common';
 import { ProductsRepository } from './products.repository';
 import { CreateProductDto } from './dtos/createProduct.dto';
@@ -12,7 +13,7 @@ import { Product } from './entities/product.entity';
 import { FilesService } from '../files/files.service';
 
 @Injectable()
-export class ProductsService {
+export class ProductsService implements OnModuleInit {
   constructor(
     private readonly productsRepository: ProductsRepository,
     private readonly categoriesService: CategoriesService,
@@ -63,6 +64,8 @@ export class ProductsService {
   }
 
   async seedProducts() {
+    await this.categoriesService.seedCategories();
+    console.log('Categories seeded');
     const products = productsData;
 
     const insertedProducts = [];
@@ -114,5 +117,10 @@ export class ProductsService {
       })),
       productsAlreadyInserted: alreadyInserted
     };
+  }
+
+  async onModuleInit() {
+    console.log('Inicializando Products Module...');
+    await this.seedProducts();
   }
 }

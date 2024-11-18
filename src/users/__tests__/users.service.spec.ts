@@ -38,8 +38,6 @@ describe('UsersService', () => {
     jest.clearAllMocks();
   });
 
-  // Aquí agregaremos las pruebas específicas para cada función
-
   it('debería devolver una lista de usuarios', async () => {
     const page = 1;
     const limit = 10;

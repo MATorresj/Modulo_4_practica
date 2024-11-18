@@ -24,12 +24,10 @@ module.exports = {
     'prettier/prettier': [
       'error',
       {
-        singleQuote: true, // Puedes cambiar a true si prefieres comillas simples
-        semi: true, // Asegurar que haya punto y coma
-        trailingComma: 'none', // Sin coma final
-        bracketSpacing: true, // Espacios dentro de objetos
-        // tabWidth: 2, // Tabulación de 2 espacios
-        // useTabs: false, // Preferir espacios sobre tabs
+        singleQuote: true,
+        semi: true,
+        trailingComma: 'none',
+        bracketSpacing: true,
         endOfLine: 'auto',
       },
     ],

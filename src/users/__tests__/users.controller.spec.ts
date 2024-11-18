@@ -12,7 +12,6 @@ describe('UsersController', () => {
   let usersController: UsersController;
   let usersService: jest.Mocked<UsersService>;
 
-  // Define los mocks completos aquí para usarlos en varias pruebas
   const mockUsers = [
     {
       id: '1',

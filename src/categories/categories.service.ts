@@ -30,8 +30,4 @@ export class CategoriesService {
   async getCategories(): Promise<Category[]> {
     return this.categoriesRepository.getCategories();
   }
-
-  // async findByName(name: string) {
-  //   return await this.categoriesRepository.findOne(name);
-  // }
 }

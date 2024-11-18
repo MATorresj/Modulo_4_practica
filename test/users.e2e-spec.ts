@@ -153,12 +153,6 @@ describe('Users E2E', () => {
     jest.clearAllMocks();
   });
 
-  // afterAll(async () => {
-  //   if (app) {
-  //     await app.close();
-  //   }
-  // });
-
   it('GET /users', async () => {
     const req = await request(app.getHttpServer())
       .get('/users')
@@ -276,7 +270,6 @@ describe('Users E2E', () => {
     const userId = 'a3012bab-7410-4379-9aa4-c5d31c82a145';
     const updatedUserData = { name: 'holaaaaa' };
 
-    // Mock del método updateUser en el repositorio de usuarios
     mockUsersRepository.updateUser.mockResolvedValueOnce({
       message: 'Usuario actualizado con éxito',
       user: {
@@ -313,7 +306,6 @@ describe('Users E2E', () => {
   it('DELETE /users/:id - elimina el usuario con éxito', async () => {
     const userId = 'a29cc43c-d624-473d-bb3f-91628b235254';
 
-    // Mock del método deleteUser en el repositorio de usuarios
     mockUsersRepository.deleteUser.mockResolvedValueOnce({
       message: 'Usuario eliminado con éxito',
       user: {

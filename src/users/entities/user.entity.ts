@@ -31,7 +31,6 @@ export class User {
   @Column({ length: 50 })
   email: string;
 
-  //pendiente corrección
   @ApiProperty({
     description: 'Contraseña del usuario (hashed)',
     example: 'hashed_password_123'
