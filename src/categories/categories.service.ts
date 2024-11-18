@@ -31,7 +31,7 @@ export class CategoriesService {
     return this.categoriesRepository.getCategories();
   }
 
-  async findByName(name: string) {
-    return await this.categoriesRepository.findOne(name);
-  }
+  // async findByName(name: string) {
+  //   return await this.categoriesRepository.findOne(name);
+  // }
 }

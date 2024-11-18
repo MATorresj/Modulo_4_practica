@@ -82,14 +82,17 @@ export class ProductsService {
           const newProduct = await this.productsRepository.createProduct({
             ...product,
             categoryId: String(productCategory.id),
-            imgUrl: 'https://via.placeholder.com/150'
+            imgUrl:
+              'https://images.vexels.com/media/users/3/199820/isolated/preview/892bfdfcb80b356c53405aafbb716513-caja-de-carton-isometrica.png'
           });
           insertedProducts.push(newProduct);
         } else {
           alreadyInserted.push(product.name);
         }
       } else {
-        console.warn(`Categoría ${product.category} no encontrada.`);
+        throw new BadRequestException(
+          `Categoría ${product.category} no encontrada.`
+        );
       }
     }
     if (insertedProducts.length === 0 && alreadyInserted.length > 0) {

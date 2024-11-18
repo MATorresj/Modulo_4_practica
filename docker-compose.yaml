@@ -1,7 +1,8 @@
 version: '3.8'
 services:
   ecommerce-matorresj-3:
-    build: ./
+    # build: ./
+    image: matorresj/modulo_4_practica:latest
     ports:
       - "3001:3000"
     env_file:

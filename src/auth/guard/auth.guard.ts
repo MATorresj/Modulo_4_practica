@@ -14,9 +14,7 @@ export class AuthGuard implements CanActivate {
     private readonly usersRepository: UsersRepository,
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService
-  ) {
-    // console.log('AuthGuard: UsersRepository:', this.usersRepository);
-  }
+  ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();

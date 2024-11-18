@@ -29,20 +29,20 @@ export class OrdersRepository {
   async addOrder(userId: string, productIds: string[]): Promise<Order> {
     const user = await this.userRepository.findOne({ where: { id: userId } });
     if (!user) {
-      throw new Error('User not found');
+      throw new Error('Usuario no encontrado');
     }
 
     const products = await this.productRepository.find({
       where: { id: In(productIds) }
     });
     if (!products || products.length === 0) {
-      throw new Error('Products not found');
+      throw new Error('Productos no encontrados');
     }
 
     const availableProducts = products.filter((product) => product.stock > 0);
 
     if (availableProducts.length === 0) {
-      throw new Error('No products with available stock');
+      throw new Error('Productos no disponibles');
     }
 
     let total = 0;
@@ -50,7 +50,9 @@ export class OrdersRepository {
       const productPrice = Number(product.price);
 
       if (isNaN(productPrice) || productPrice <= 0) {
-        throw new Error(`Invalid price for product ${product.id}`);
+        throw new Error(
+          `Precio invalido para el producto con id ${product.id}`
+        );
       }
 
       total += productPrice;

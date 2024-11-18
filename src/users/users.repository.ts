@@ -3,6 +3,7 @@ import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { v4 as uuid } from 'uuid';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersRepository {
@@ -59,6 +60,12 @@ export class UsersRepository {
     updateUserDto: Partial<User>
   ): Promise<{ message: string; user?: User }> {
     const user = await this.userRepository.findOne({ where: { id } });
+
+    if (updateUserDto.password) {
+      const hashedPassword = await bcrypt.hash(updateUserDto.password, 10);
+      updateUserDto.password = hashedPassword;
+    }
+
     if (user) {
       const updatedUser = { ...user, ...updateUserDto };
       await this.userRepository.save(updatedUser);

@@ -32,7 +32,7 @@ export class Product {
   description: string;
 
   @ApiProperty({ description: 'Precio del producto', example: 1499.99 })
-  @Column({ type: 'decimal' })
+  @Column('decimal', { precision: 10, scale: 2 })
   price: number;
 
   @ApiProperty({ description: 'Cantidad de stock disponible', example: 100 })

@@ -1,4 +1,4 @@
-import { /*BadRequestException*/ Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { UsersRepository } from './users.repository';
 import { User } from './entities/user.entity';
 import { CreateUserDto } from './dtos/createUser.dto';
@@ -45,13 +45,13 @@ export class UsersService {
     return this.usersRepository.findByEmail(email);
   }
 
-  // async makeAdmin(userId: string): Promise<User> {
-  //   const user = await this.usersRepository.getById(userId);
-  //   if (!user) {
-  //     throw new BadRequestException('Usuario no encontrado');
-  //   }
-  //   user.isAdmin = true;
-  //   await this.usersRepository.updateUser(userId, user);
-  //   return user;
-  // }
+  async makeAdmin(userId: string): Promise<User> {
+    const user = await this.usersRepository.getById(userId);
+    if (!user) {
+      throw new BadRequestException('Usuario no encontrado');
+    }
+    user.isAdmin = true;
+    await this.usersRepository.updateUser(userId, user);
+    return user;
+  }
 }

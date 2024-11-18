@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { UsersRepository } from '../../users/users.repository';
+import { UserRole } from '../../users/user-role.enum';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
@@ -15,7 +16,7 @@ export class RolesGuard implements CanActivate {
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const roles = this.reflector.get<string[]>('roles', context.getHandler());
+    const roles = this.reflector.get<UserRole[]>('roles', context.getHandler());
     if (!roles) {
       return true;
     }
@@ -31,7 +32,7 @@ export class RolesGuard implements CanActivate {
 
     const isAdmin = userEntity.isAdmin;
 
-    if (roles.includes('admin') && !isAdmin) {
+    if (roles.includes(UserRole.Admin) && !isAdmin) {
       throw new ForbiddenException('Acceso denegado: No eres administrador');
     }
 

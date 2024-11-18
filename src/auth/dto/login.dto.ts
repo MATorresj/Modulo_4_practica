@@ -11,7 +11,7 @@ export class LoginDto {
 
   /**
    * Contraseña del usuario
-   * @example Password!123
+   * @example Password123!
    */
   @IsString()
   @IsNotEmpty()

@@ -27,7 +27,7 @@ export class CreateUserDto {
 
   /**
    * la contraseña debe ser una contraseña dificil de encontrar
-   * @example Strong!(Password
+   * @example Hola123!
    */
   @IsNotEmpty()
   @IsString()
@@ -40,7 +40,7 @@ export class CreateUserDto {
 
   /**
    * Confirmación de la contraseña
-   * @example Strong!(Password
+   * @example Hola123!
    */
   @IsNotEmpty()
   @IsString()

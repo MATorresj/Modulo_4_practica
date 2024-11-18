@@ -28,9 +28,9 @@ export class CategoriesRepository {
     return await this.categoryRepository.save(newCategory);
   }
 
-  async findOne(name: string): Promise<Category | undefined> {
-    return await this.categoryRepository.findOne({
-      where: { name }
-    });
-  }
+  // async findOne(name: string): Promise<Category | undefined> {
+  //   return await this.categoryRepository.findOne({
+  //     where: { name }
+  //   });
+  // }
 }

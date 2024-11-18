@@ -2,11 +2,11 @@ import { Module } from '@nestjs/common';
 import { UsersModule } from './users/users.module';
 import { ProductsModule } from './products/products.module';
 import { AuthModule } from './auth/auth.module';
+import { OrderModule } from './orders/orders.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import typeOrmConfig from './config/typeorm';
 import { CategoriesModule } from './categories/categories.module';
-import { OrderModule } from './orders/orders.module';
+import typeOrmConfig from './config/typeorm';
 import { JwtModule } from '@nestjs/jwt';
 @Module({
   imports: [

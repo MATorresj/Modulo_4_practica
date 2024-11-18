@@ -10,8 +10,7 @@ describe('CategoriesService', () => {
   beforeEach(async () => {
     repositoryMock = {
       getCategories: jest.fn(),
-      addCategories: jest.fn(),
-      findOne: jest.fn()
+      addCategories: jest.fn()
     };
 
     const module: TestingModule = await Test.createTestingModule({
@@ -87,30 +86,6 @@ describe('CategoriesService', () => {
       );
 
       await expect(service.seedCategories()).rejects.toThrow(Error);
-    });
-  });
-
-  describe('findByName', () => {
-    it('debe devolver una categoría si existe', async () => {
-      const mockCategory: Category = {
-        id: '1',
-        name: 'smartphone',
-        products: []
-      } as Category;
-
-      (repositoryMock.findOne as jest.Mock).mockResolvedValue(mockCategory);
-
-      const category = await service.findByName('smartphone');
-      expect(category).toEqual(mockCategory);
-      expect(repositoryMock.findOne).toHaveBeenCalledWith('smartphone');
-    });
-
-    it('debe devolver undefined si la categoría no existe', async () => {
-      (repositoryMock.findOne as jest.Mock).mockResolvedValue(undefined);
-
-      const category = await service.findByName('no-existente');
-      expect(category).toBeUndefined();
-      expect(repositoryMock.findOne).toHaveBeenCalledWith('no-existente');
     });
   });
 });

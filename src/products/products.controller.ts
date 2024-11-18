@@ -20,6 +20,7 @@ import { FilesService } from '../files/files.service';
 import { RolesGuard } from '../auth/guard/roles.guard';
 import { Roles } from '../auth/guard/roles.decorator';
 import { ApiBearerAuth } from '@nestjs/swagger';
+import { UserRole } from '../users/user-role.enum';
 
 @Controller('products')
 export class ProductsController {
@@ -46,6 +47,11 @@ export class ProductsController {
   async getProductsById(@Param() params: ValidateIdDto) {
     try {
       const product = await this.productsService.getProductById(params.id);
+      if (!product || product === undefined) {
+        throw new NotFoundException(
+          `Producto con ID ${params.id} no encontrado.`
+        );
+      }
       return product;
     } catch (error) {
       throw new NotFoundException(`Error al obtener producto: ${error}`);
@@ -70,7 +76,7 @@ export class ProductsController {
   @ApiBearerAuth()
   @Put(':id')
   @UseGuards(AuthGuard, RolesGuard)
-  @Roles('admin')
+  @Roles(UserRole.Admin)
   async updateProduct(
     @Param() params: ValidateIdDto,
     @Body() updateProductDto: UpdateProductDto
